@@ -1,4 +1,7 @@
 from src.config import TEMA
+from src.persistencia.texto import cargar_texto
+from src.catalogo import listar_catalogo
+
 
 TEMAS = {
     "pokedex": "Pokédex",
@@ -6,6 +9,7 @@ TEMAS = {
     "musica": "Biblioteca musical",
 }
 
+ruta_recetas = "data/recetas.txt"
 
 def pendiente():
     print("Todavía no está implementado. Completar en la entrega que corresponde.")
@@ -38,7 +42,11 @@ def main():
         opcion = input("> ").strip()
         if opcion == "0":
             print("Chau.")
-        elif opcion in {"1", "2", "3", "4", "5", "6", "7", "8", "9"}:
+        elif opcion == "1":
+            lista = cargar_texto(ruta_recetas)
+            listar_catalogo(lista)
+
+        elif opcion in {"2", "3", "4", "5", "6", "7", "8", "9"}:
             pendiente()
         else:
             print("Opción inválida.")
