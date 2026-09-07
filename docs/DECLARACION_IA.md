@@ -6,7 +6,8 @@ Fecha de esta versión del archivo:
 
 | Entrega | Fecha | Herramienta (ChatGPT, Cursor, Copilot, otra) | Para qué (diseño, código, debug, docs) | Qué pegaron o generaron | Qué reescribieron / revisaron a mano | Integrante |
 | --- | --- | --- | --- | --- | --- | --- |
-| E1 | 05/09/2026 | ChatGPT/Gemini | Consultas de referencia, de diseño del proyecto y documentación | No se utilizó código generado por IA. Se realizaron consultas puntuales sobre conceptos, organización y funcionamiento. | Todo el código fue escrito y revisado manualmente. Se pidieron sugerencias para simplificar código y manipulación eficiente de diccionarios. Se realizaron consultas puntuales de debug, sin subir código completo para su corrección. | Luciano Aranda |
+| E1 | 05/09/2026 | ChatGPT/Gemini | Consultas de referencia, de diseño del proyecto y documentación | No se utilizó código generado por IA. Se realizaron consultas puntuales sobre conceptos, organización y funcionamiento. | Todo el código fue escrito y revisado manualmente. Se pidieron sugerencias para simplificar código y manipulación eficiente de diccionarios. Se realizaron consultas puntuales de debug, sin subir código completo para su corrección. | Luciano Aranda | 
+| E1 | 07/09/2026 | ChatGPT | Consultas de orientación, resolución de dudas conceptuales y organización | No se utilizó código generado por AI. Sólo se realizaron preguntas con el fin de comprender conceptos y resolver dudas | Se reviso manualmente el código. Se hicieron consultas puntuales de orientación sobre el funcionamiento. | Daiana Lozada |
 | E2 |  |  |  |  |  |  |
 | E3 |  |  |  |  |  |  |
 | E4 |  |  |  |  |  |  |
