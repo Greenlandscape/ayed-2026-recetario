@@ -4,12 +4,14 @@ Completar y hacer crecer en cada entrega. No hace falta prosa larga: oraciones c
 
 ## 1. Grupo y tema
 
-- Tema:
-- Por qué lo eligieron (5–8 líneas):
+- Tema: Recetario.
+- Por qué lo eligieron (5–8 líneas): El tema del recetario es sencillo y de fácil comprensión global. Nos permite enfocarnos en el código y en los detalles técnicos del proyecto. Además, las recetas y sus ingredientes son elementos fáciles de identificar y relacionar. Estimamos que la simplicidad de la idea es una ventaja a la hora de incorporar estructuras de datos más complejas, como los TADs, y desarrollar las clases que representarán los objetos del dominio en las próximas entregas.
 
 ## 2. Modelo
 
 Qué es un ítem del catálogo. Qué es mutable y qué no (E1). Cómo se relacionan catálogo, colección principal, pila y cola.
+
+Un item del catálogo es un elemento de la lista de diccionarios que se obtiene al cargar los txt. Cada elemento de esa lista es un diccionario de una receta en particular. Hasta la entrega 1 utilizamos: Mutables: listas, diccionarios. Inmutables: strings. 
 
 ```text
 (pueden pegar un diagrama ASCII o una lista de clases)
