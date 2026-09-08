@@ -8,6 +8,7 @@ Fecha de esta versión del archivo:
 | --- | --- | --- | --- | --- | --- | --- |
 | E1 | 05/09/2026 | ChatGPT/Gemini | Consultas de referencia, de diseño del proyecto y documentación | No se utilizó código generado por IA. Se realizaron consultas puntuales sobre conceptos, organización y funcionamiento. | Todo el código fue escrito y revisado manualmente. Se pidieron sugerencias para simplificar código y manipulación eficiente de diccionarios. Se realizaron consultas puntuales de debug, sin subir código completo para su corrección. | Luciano Aranda | 
 | E1 | 07/09/2026 | ChatGPT | Consultas de orientación, resolución de dudas conceptuales y organización | No se utilizó código generado por AI. Sólo se realizaron preguntas con el fin de comprender conceptos y resolver dudas | Se reviso manualmente el código. Se hicieron consultas puntuales de orientación sobre el funcionamiento. | Daiana Lozada |
+| E1 | 08/09/2026 | ChatGPT | Orientación sobre la consigna, GitHub/PR y revisión de la implementación | No se utilizó código generado por IA | Revisión y pruebas realizadas manualmente | Morena Gomez |
 | E2 |  |  |  |  |  |  |
 | E3 |  |  |  |  |  |  |
 | E4 |  |  |  |  |  |  |
