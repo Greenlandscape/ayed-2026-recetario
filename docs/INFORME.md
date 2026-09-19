@@ -19,10 +19,19 @@ Un item del catálogo es un elemento de la lista de diccionarios que se obtiene 
 
 ## 3. Recursión (E2)
 
-- Función:
-- Caso base:
-- Caso recursivo:
+- Función: Libro_recetas.desglosar_subrecetas(id)
+- Caso base: si la receta no tiene subrecetas → devolver [id] (concatenando a una lista)
+- Caso recursivo: [id] + Libro_recetas.desglosar_subrecetas(subreceta siguiente)
 - Traza de un ejemplo real del dataset:
+    Traza para Asado (id 9): según subrecetas.txt, tiene dos subrecetas: 1 y 2.
+    Llamada 1: Libro_recetas.desglosar_subrecetas(9) → tiene subrecetas 1 y 2.
+    → devuelve [9] + Libro_recetas.desglosar_subrecetas(1)
+    Llamada 2: Libro_recetas.desglosar_subrecetas(1) → no tiene subrecetas, es hoja.
+    → devuelve [1]
+    Llamada 3: Libro_recetas.desglosar_subrecetas(2) → no tiene subrecetas, es hoja.
+    → devuelve [2]
+    Resultado: [9] + [1] + [2] = [9, 1, 2]
+
 
 ## 4. TADs (E3)
 

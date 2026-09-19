@@ -23,3 +23,9 @@ Mínimos: 8 casos escritos en E2; ejecutados en E3; 15 de regresión en E6 (pila
 | P13 | E5 | Guardar texto (`.txt`), salir, volver a entrar |  | los datos siguen |  |  |
 | P14 | E5 | Guardar binario y modificar un registro por id |  | al recargar, ese campo cambió |  |  |
 | P15 | E5 | Abrir un binario truncado o con magia mala | archivo basura | excepción de archivo inválido |  |  |
+| P16 | E2 | Desglosar una receta con más de un nivel de profundidad | id = 9 | imprime la lista completa |  |  |
+| P17 | E2 | Desglosar una receta con un solo nivel de profundidad | id = 1 | imprime el id de la hoja |  |  |
+| P18 | E2 | Arrancar el programa (carga de recetas y subrecetas) | recetas.txt, subrecetas.txt | el programa arranca sin errores, catálogo y tabla de subrecetas cargados |  |  |
+| P19 | E2 | Ver el detalle de una receta que existe | id = 9 | muestra nombre, tiempo, dificultad y categoría |  |  |
+| P20 | E2 | Ver el detalle de una receta que NO existe | id = -1 | avisa que no existe |  |  |
+| P21 | E2 | Desglosar una receta que no existe | id = -1 | avisa que no existe |  |  |

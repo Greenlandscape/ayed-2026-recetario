@@ -1,6 +1,7 @@
 from src.config import TEMA
 from src.persistencia.texto import cargar_texto
 from src.catalogo import listar_catalogo
+from src.dominio.recetario import Recetario
 
 
 TEMAS = {
@@ -10,6 +11,15 @@ TEMAS = {
 }
 
 ruta_recetas = "data/recetas.txt"
+ruta_subrecetas = "data/subrecetas.txt"
+# Type lista de dicc
+recetas = cargar_texto(ruta_recetas)
+subrecetas = cargar_texto(ruta_subrecetas)
+# Instanciamos el recetario
+Libro_recetas = Recetario()
+# Cargamos las recetas y subrecetas
+Libro_recetas.cargar_recetas(recetas)
+Libro_recetas.cargar_subrecetas(subrecetas)
 
 def pendiente():
     print("Todavía no está implementado. Completar en la entrega que corresponde.")
@@ -43,10 +53,20 @@ def main():
         if opcion == "0":
             print("Chau.")
         elif opcion == "1":
-            lista = cargar_texto(ruta_recetas)
-            listar_catalogo(lista)
-
-        elif opcion in {"2", "3", "4", "5", "6", "7", "8", "9"}:
+            listar_catalogo(recetas)
+        elif opcion == "2":
+            receta_id = int(input("Ingrese el id de la receta para mostrar detalles: "))
+            if not Libro_recetas.mostrar_datos_receta(receta_id): # si existe la muestra, si no, muestra msj
+                print("No existe una receta con ese id")
+        elif opcion == "5":
+            r_desglosar = int(input("Ingrese el número de la receta a desglosar: "))
+            # any() recorre el catálogo y devuelve True si algún dict tiene id == receta_id (convertido a str). Corta al primer match.
+            if not any(receta["id"] == str(r_desglosar) for receta in Libro_recetas.catalogo_recetas):
+                print("No existe una receta con ese id")
+            else:
+                receta_desglosada = Libro_recetas.desglosar_subrecetas(r_desglosar)
+                print(f"Desgloce: {receta_desglosada}")
+        elif opcion in {"3", "4", "6", "7", "8", "9"}:
             pendiente()
         else:
             print("Opción inválida.")
