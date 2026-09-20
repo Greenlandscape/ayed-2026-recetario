@@ -10,6 +10,7 @@ Fecha de esta versión del archivo:
 | E1 | 07/09/2026 | ChatGPT | Consultas de orientación, resolución de dudas conceptuales y organización | No se utilizó código generado por AI. Sólo se realizaron preguntas con el fin de comprender conceptos y resolver dudas | Se reviso manualmente el código. Se hicieron consultas puntuales de orientación sobre el funcionamiento. | Daiana Lozada |
 | E1 | 08/09/2026 | ChatGPT | Orientación sobre la consigna, GitHub/PR y revisión de la implementación | No se utilizó código generado por IA | Revisión y pruebas realizadas manualmente | Morena Gomez |
 | E2 | 19/09/2026 | ChatGPT/Claude | Consultas de referencia, de diseño y sobre recursividad | Se consultó sobre implementación eficiente de clases (dónde poner la función recursiva por ej), debug y particularmente la expresión generadora que está en el main | Luciano Aranda |
+| E2 | 20/09/2026 | ChatGPT/Gemini | Consultas de orientación sobre diseño, recursividad y funcionamiento de código | Se consultaron conceptos, implementación y estructura eficiente de clases y recursión, además de orientación sobre debugging de errores durante pruebas de código. | Daiana Lozada |
 | E3 |  |  |  |  |  |  |
 | E4 |  |  |  |  |  |  |
 | E5 |  |  |  |  |  |  |
