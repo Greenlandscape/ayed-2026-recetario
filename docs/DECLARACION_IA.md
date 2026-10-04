@@ -14,6 +14,7 @@ Fecha de esta versión del archivo:
 | E2 | 20/09/2026 | ChatGPT/Gemini | Consultas de referencia y prueba de código. Explicaciones y ejemplificaciones de la recursividad. Y se consulto sobre funcionamiento del código. | Morena Gomez |
 | E3 | 04-10-2026 | Chatgpt | Consultas de referencia. Se usó especialemente para debug en esta entrega. | Luciano Aranda |  |  |
 | E3 | 04/10/2026 | Gemini | Consultas de orientación, funcionamiento de código y referencia.| Daiana Lozada |  |  |
+| E3 | 04-10-2026 | Gemini | Se utilizó IA para prueba de código y explicaciones respecto al mismo. | Morena Gomez |  |  |
 | E4 |  |  |  |  |  |  |
 | E5 |  |  |  |  |  |  |
 | E6 |  |  |  |  |  |  |
