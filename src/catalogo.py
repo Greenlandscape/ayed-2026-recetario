@@ -1,13 +1,14 @@
 """Funciones para gestionar el catálogo de recetas."""
 
-
-def listar_catalogo(lista_diccionarios):
-    """Muestra en pantalla la lista de diccionarios que devuelve cargar_texto()"""
+def listar_catalogo(lista_enlazada_recetas):
+    """Muestra en pantalla la lista enlazada de objetos Receta."""
     print(f"=== CATÁLOGO ===")
-    for item in lista_diccionarios:
-        print(f"🔹 ELEMENTO")
-        # Recorremos cada propiedad (clave y valor) de este diccionario en particular
-        for clave, valor in item.items():
-            # dormato de lista de item con la clave en mayúsculas
-            print(f"   • {clave.upper()}: {valor}")
+    # Recorremos cada elemento, es decir, cada objeto tipo Receta
+    for receta in lista_enlazada_recetas:
+        print(f"🔹 ELEMENTO {receta.receta_id}")
+        print(f"   • Nombre : {receta.nombre.upper()}")
+        print(f"   • Tiempo : {receta.tiempo}")
+        print(f"   • Dificultad : {receta.dificultad}")
+        print(f"   • Categoría : {receta.categoria}")
         print("-" * 40) # Separador
+    
