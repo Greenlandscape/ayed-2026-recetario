@@ -12,7 +12,7 @@ Fecha de esta versión del archivo:
 | E2 | 19/09/2026 | ChatGPT/Claude | Consultas de referencia, de diseño y sobre recursividad | Se consultó sobre implementación eficiente de clases (dónde poner la función recursiva por ej), debug y particularmente la expresión generadora que está en el main | Luciano Aranda |
 | E2 | 20/09/2026 | ChatGPT/Gemini | Consultas de orientación sobre diseño, recursividad y funcionamiento de código | Se consultaron conceptos, implementación y estructura eficiente de clases y recursión, además de orientación sobre debugging de errores durante pruebas de código. | Daiana Lozada |
 | E2 | 20/09/2026 | ChatGPT/Gemini | Consultas de referencia y prueba de código. Explicaciones y ejemplificaciones de la recursividad. Y se consulto sobre funcionamiento del código. | Morena Gomez |
-| E3 |  |  |  |  |  |  |
+| E3 | 04-10-2026 | Chatgpt | Consultas de referencia. Se usó especialemente para debug en esta entrega. | Luciano Aranda |  |  |
 | E4 |  |  |  |  |  |  |
 | E5 |  |  |  |  |  |  |
 | E6 |  |  |  |  |  |  |
