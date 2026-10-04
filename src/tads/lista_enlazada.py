@@ -40,7 +40,8 @@ class ListaEnlazada:
             return
         if self._cabeza.dato == dato:
             self._cabeza = self._cabeza.siguiente # "corro" el nodo
-            self._tamanio -= 1    
+            self._tamanio -= 1
+            return    
         # ahora recorremos la lista hasta hallar el dato a eliminar
         actual = self._cabeza
         while actual.siguiente: # no estaba en la cabecera, empezamos por el segundo nodo

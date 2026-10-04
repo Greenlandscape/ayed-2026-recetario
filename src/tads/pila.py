@@ -31,5 +31,6 @@ class Pila:
         return tope.dato
 
 
-
-
+    def mostrar(self):
+        for item in self._items:
+            print(f" {item.nombre}")

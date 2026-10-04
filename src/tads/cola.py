@@ -29,3 +29,8 @@ class Cola:
         if self.esta_vacia():
             raise ColaVaciaError("La cola está vacía.")
         return self._items._cabeza.dato
+
+    def mostrar(self):
+        for item in self._items:
+            print(f" {item.nombre}")
+            

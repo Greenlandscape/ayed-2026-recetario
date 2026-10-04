@@ -2,7 +2,7 @@ from src.tads.lista_enlazada import ListaEnlazada
 from src.excepciones import ColeccionLlenaError
 
 class Menu_Semanal:
-    '''pass'''
+    '''Colección con tope.'''
     def __init__(self, tope=6):
         """Crea un menú semanal con un tope máximo de recetas."""
         self._recetas = ListaEnlazada()
@@ -19,4 +19,4 @@ class Menu_Semanal:
     
     def listar(self):
         for receta in self._recetas:
-            print(f" {receta}")
+            print(f" {receta.nombre}")
