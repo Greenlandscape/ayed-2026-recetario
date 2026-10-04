@@ -2,6 +2,7 @@ from src.config import TEMA
 from src.persistencia.texto import cargar_texto
 from src.catalogo import listar_catalogo
 from src.dominio.recetario import Recetario
+from src.excepciones import ColeccionLlenaError, PilaVaciaError, ColaVaciaError
 
 
 TEMAS = {
@@ -53,7 +54,7 @@ def main():
         if opcion == "0":
             print("Chau.")
         elif opcion == "1":
-            listar_catalogo(recetas)
+            listar_catalogo(Libro_recetas.catalogo_recetas) # se modificó la función para usar lista enlazada
         elif opcion == "2":
             receta_id = int(input("Ingrese el id de la receta para mostrar detalles: "))
             if not Libro_recetas.mostrar_datos_receta(receta_id): # si existe la muestra, si no, muestra msj
@@ -61,7 +62,7 @@ def main():
         elif opcion == "5":
             r_desglosar = int(input("Ingrese el número de la receta a desglosar: "))
             # any() recorre el catálogo y devuelve True si algún dict tiene id == receta_id (convertido a str). Corta al primer match.
-            if not any(receta["id"] == str(r_desglosar) for receta in Libro_recetas.catalogo_recetas):
+            if not any(receta.receta_id == str(r_desglosar) for receta in Libro_recetas.catalogo_recetas):
                 print("No existe una receta con ese id")
             else:
                 receta_desglosada = Libro_recetas.desglosar_subrecetas(r_desglosar)
