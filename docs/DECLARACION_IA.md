@@ -15,7 +15,7 @@ Fecha de esta versión del archivo:
 | E3 | 04-10-2026 | Chatgpt | Consultas de referencia. Se usó especialemente para debug en esta entrega. | Luciano Aranda |  |  |
 | E3 | 04/10/2026 | Gemini | Consultas de orientación, funcionamiento de código y referencia.| Daiana Lozada |  |  |
 | E3 | 04-10-2026 | Gemini | Se utilizó IA para prueba de código y explicaciones respecto al mismo. | Morena Gomez |  |  |
-| E4 |  |  |  |  |  |  |
+| E4 | 01-1--2026 | Claude | Particularmente en la adaptacion del algoritmo de ordenamiento por inserción, me pareció complejo. También con el test de medir los tiempos. | Corección de bugs, ayuda para generar el test. | Luciano Aranda |  |
 | E5 |  |  |  |  |  |  |
 | E6 |  |  |  |  |  |  |
 

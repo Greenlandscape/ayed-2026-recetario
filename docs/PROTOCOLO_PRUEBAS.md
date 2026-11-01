@@ -29,3 +29,9 @@ Mínimos: 8 casos escritos en E2; ejecutados en E3; 15 de regresión en E6 (pila
 | P19 | E2 | Ver el detalle de una receta que existe | id = 9 | muestra nombre, tiempo, dificultad y categoría |  |  |
 | P20 | E2 | Ver el detalle de una receta que NO existe | id = -1 | avisa que no existe |  |  |
 | P21 | E2 | Desglosar una receta que no existe | id = -1 | avisa que no existe |  |  |
+| P22 | E4 | Ordenar por id con selección | id | orden numérico | pasa | Antes de usar `int(receta.receta_id)` salía "1, 10, 11...". Corregido en la clave. |
+| P23 | E4 | Ordenar por nombre con inserción | nombre | orden alfabético | pasa | Lista alfabética correcta (Arroz con leche ... Tortilla de papas). |
+| P24 | E4 | Ordenar por dos criterios a la vez | Nombre + Dificultad (inserción) | ordena por el principal; el secundario desempata | pasa | Se usa una tupla como clave. Con nombre único el desempate no se nota. |
+| P25 | E4 | Búsqueda binaria de primer elemento | "Arroz con leche" | lo encuentra | pasa | Reordena y avisa antes de buscar. |
+| P26 | E4 | Búsqueda binaria de último elemento | "Tortilla de papas" | lo encuentra | pasa | Caso donde más fácil falla el cálculo de `rango`. |
+| P27 | E4 | Búsqueda binaria de nombre inexistente | "Pizza" | "No se encontró la receta." | pasa | Sin traceback, el menú sigue. |
