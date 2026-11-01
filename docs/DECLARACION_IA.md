@@ -16,7 +16,8 @@ Fecha de esta versión del archivo:
 | E3 | 04/10/2026 | Gemini | Consultas de orientación, funcionamiento de código y referencia.| Daiana Lozada |  |  |
 | E3 | 04-10-2026 | Gemini | Se utilizó IA para prueba de código y explicaciones respecto al mismo. | Morena Gomez |  |  |
 | E4 | 01-1--2026 | Claude | Particularmente en la adaptacion del algoritmo de ordenamiento por inserción, me pareció complejo. También con el test de medir los tiempos. | Corección de bugs, ayuda para generar el test. | Luciano Aranda |  |
-| E5 |  |  |  |  |  |  |
+| E4 | 01/11/2026 | ChatGPT | Consulta y orientación conceptual sobre algoritmos de búsqueda y ordenamiento. | No se utilizó código generado por IA. | Se revisaron y analizaron  los conceptos y explicaciones para comprender su aplicación. | Morena Gomez |
+| E4 | 01/11/2026 | Gemini | Orientación sobre búsqueda y ordenamiento. | Consultas puntuales sobre funcionamiento del código | Daiana Lozada |
 | E6 |  |  |  |  |  |  |
 
 Compromiso: cualquiera del grupo puede explicar cualquier archivo del tag.
