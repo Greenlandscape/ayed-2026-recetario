@@ -20,6 +20,6 @@ Fecha de esta versión del archivo:
 | E4 | 01/11/2026 | Gemini | Orientación sobre búsqueda y ordenamiento. | Consultas puntuales sobre funcionamiento del código | Daiana Lozada |
 | E5 | 15-11-2026 | ChatGPT | Consultas sobre el funcionamiento de `struct` y el manejo de archivos binarios. | Orientación durante la implementación de la persistencia TXT y BIN, debug y diseño de pruebas de validación. | Luciano Aranda |  |
 | E5 | 15/11/2026 | Gemini | Orientación sobre la persistencia de datos y el funcionamiento del módulo `struct` | Se consulto sobre el diseño y la aplicación de persistencia. No se uso IA para escribir código | Daiana Lozada | 
-
+| E5 | 15/11/2026 | ChatGPT | Consulta y orientación conceptual sobre persistencia de datos en archivos TXT y binarios, operaciones ABM y revisión de la implementación. | No se utilizó código generado por IA. | Se analizaron manualmente las explicaciones y observaciones para comprender los conceptos y evaluar el código. | Morena Gomez |
 
 Compromiso: cualquiera del grupo puede explicar cualquier archivo del tag.
