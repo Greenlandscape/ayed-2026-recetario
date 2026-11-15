@@ -35,3 +35,7 @@ Mínimos: 8 casos escritos en E2; ejecutados en E3; 15 de regresión en E6 (pila
 | P25 | E4 | Búsqueda binaria de primer elemento | "Arroz con leche" | lo encuentra | pasa | Reordena y avisa antes de buscar. |
 | P26 | E4 | Búsqueda binaria de último elemento | "Tortilla de papas" | lo encuentra | pasa | Caso donde más fácil falla el cálculo de `rango`. |
 | P27 | E4 | Búsqueda binaria de nombre inexistente | "Pizza" | "No se encontró la receta." | pasa | Sin traceback, el menú sigue. |
+| P28 | E5 | Guardar texto (`.txt`), salir, volver a entrar |  | Los datos siguen | pasa | Se comprobó la persistencia de los datos en TXT. |
+| P29 | E5 | Guardar binario y modificar un registro por id; recargar desde BIN (9d) |  | Al recargar, ese campo cambió | pasa | Alta, baja y modificación probadas. Se verificó la persistencia al recargar desde BIN. |
+| P30 | E5 | Abrir un binario truncado o con magia mala | Archivo truncado y archivo con magia incorrecta | Excepción de archivo inválido, sin traceback | pasa | Se probaron ambos casos; el programa muestra el error y continúa. |
+| P31 | E5 | Cargar un TXT con una línea que tiene campos de más | `recetas_pruebas.txt` con una línea de 6 campos | `ArchivoInvalidoError`, el programa continúa | pasa | Se comprobó también durante la carga automática al iniciar. |

@@ -1,14 +1,58 @@
 from src.config import TEMA
-from src.persistencia.texto import cargar_texto
 from src.catalogo import listar_catalogo
-from src.dominio.recetario import Recetario
-from src.excepciones import ColeccionLlenaError, PilaVaciaError, ColaVaciaError
+from src.excepciones import (
+    ColeccionLlenaError,
+    PilaVaciaError,
+    ColaVaciaError,
+    ArchivoInvalidoError,
+    ItemNoEncontradoError,
+)
 from src.dominio.menu_semanal import Menu_Semanal
 from src.tads.pila import Pila
 from src.tads.cola import Cola
 from src.dominio.receta import Receta
 from src.algoritmos.busqueda import busqueda_lineal, busqueda_binaria
 from src.algoritmos.ordenamiento import ordenar_seleccion, ordenar_insercion
+from src.dominio.recetario import (
+    Recetario,
+    armar_catalogo_desde_txt,
+    armar_subrecetas_desde_txt,
+    filas_del_catalogo,
+    ENCABEZADOS,
+)
+from src.persistencia.texto import (
+    cargar_texto,
+    guardar_texto,
+    RUTA_RECETAS,
+    RUTA_SUBRECETAS,
+    RUTA_BIN,
+)
+from src.persistencia.binario import (
+    guardar_binario,
+    cargar_binario,
+    actualizar_registro,
+    posicion_del_id,
+    alta_binario,
+    baja_binario,
+)
+
+
+def cargar_catalogo(recetario):
+    """Carga los datos desde los archivos .txt.
+    Arma el catálogo como objetos del dominio y carga la tabla
+    de subrecetas como una lista de diccionarios.
+    """
+    recetario.catalogo_recetas = armar_catalogo_desde_txt(RUTA_RECETAS)
+    recetario.tabla_subrecetas = armar_subrecetas_desde_txt(RUTA_SUBRECETAS)
+
+
+def guardar_todo():
+    """Guarda el catálogo en los dos formatos. Memoria y archivos quedan iguales."""
+    guardar_texto(
+        RUTA_RECETAS, filas_del_catalogo(Libro_recetas.catalogo_recetas), ENCABEZADOS
+    )
+    guardar_binario(RUTA_BIN, Libro_recetas.catalogo_recetas)
+
 
 TEMAS = {
     "pokedex": "Pokédex",
@@ -16,18 +60,22 @@ TEMAS = {
     "musica": "Biblioteca musical",
 }
 
-ruta_recetas = "data/recetas.txt"
-ruta_subrecetas = "data/subrecetas.txt"
-# Type lista de dicc
-recetas = cargar_texto(ruta_recetas)
-subrecetas = cargar_texto(ruta_subrecetas)
 # Instanciamos el recetario
 Libro_recetas = Recetario()
-# Cargamos las recetas y subrecetas
-Libro_recetas.cargar_recetas(recetas)
-Libro_recetas.cargar_subrecetas(subrecetas)
 
-# colección MenuSemanal con tope por defecto = 6
+# Al iniciar, cargamos el catálogo desde recetas.txt.
+# Esto permite disponer de las recetas desde el comienzo,
+# sin necesidad de realizar una carga manual desde el menú.
+try:
+    cargar_catalogo(Libro_recetas)
+    print(
+        f"Catálogo cargado desde TXT: "
+        f"{Libro_recetas.catalogo_recetas.tamanio()} ítems."
+    )
+except ArchivoInvalidoError as error:
+    print(f"Archivo inválido: {error}")
+
+# Colección MenuSemanal con tope por defecto = 6
 Menu_semana = Menu_Semanal()
 
 cola_turnos = Cola()
@@ -36,6 +84,89 @@ pila_historial = Pila()
 
 def pendiente():
     print("Todavía no está implementado. Completar en la entrega que corresponde.")
+
+
+def menu_abm_recetas(recetario):
+    while True:
+        print("\n--- ABM del catálogo de recetas ---")
+        print("1. Alta")
+        print("2. Baja")
+        print("3. Modificación")
+        print("0. Volver")
+
+        opcion = input("> ").strip()
+
+        if opcion == "0":
+            break
+
+        elif opcion == "1":
+            catalogo = recetario.catalogo_recetas
+
+            nombre = input("Nombre de la receta: ").strip()
+            tiempo = int(input("Tiempo en minutos: "))
+            dificultad = input("Dificultad: ").strip() or None
+            categoria = input("Categoría: ").strip()
+
+            nuevo_id = max((receta.receta_id for receta in catalogo), default=0) + 1
+
+            nuevo = Receta(nombre, nuevo_id, tiempo, dificultad, categoria)
+
+            catalogo.insertar_al_final(nuevo)
+            alta_binario(RUTA_BIN, nuevo)
+            guardar_texto(RUTA_RECETAS, filas_del_catalogo(catalogo), ENCABEZADOS)
+
+            print(f"Receta agregada: {nuevo.nombre} (ID: {nuevo_id})")
+
+        elif opcion == "2":
+            catalogo = recetario.catalogo_recetas
+            id_borrado = int(input("ID de la receta que desea eliminar: "))
+
+            try:
+                posicion = posicion_del_id(catalogo, id_borrado)
+
+                receta = None
+                for item in catalogo:
+                    if item.receta_id == id_borrado:
+                        receta = item
+                        break
+
+                catalogo.eliminar(receta)
+                baja_binario(RUTA_BIN, posicion)
+
+                guardar_texto(RUTA_RECETAS, filas_del_catalogo(catalogo), ENCABEZADOS)
+
+                print(f"Receta eliminada: {receta.nombre}")
+
+            except ItemNoEncontradoError as e:
+                print(e)
+
+        elif opcion == "3":
+            catalogo = recetario.catalogo_recetas
+            id_modificado = int(input("ID de la receta que desea modificar: "))
+
+            try:
+                posicion = posicion_del_id(catalogo, id_modificado)
+
+                receta = None
+                for item in catalogo:
+                    if item.receta_id == id_modificado:
+                        receta = item
+                        break
+
+                print(f"Modificando: {receta.nombre}")
+                receta.nombre = input("Nuevo nombre: ").strip()
+                receta.tiempo = int(input("Nuevo tiempo en minutos: "))
+                receta.dificultad = input("Nueva dificultad: ").strip() or None
+                receta.categoria = input("Nueva categoría: ").strip()
+
+                actualizar_registro(RUTA_BIN, posicion, receta)
+
+                guardar_texto(RUTA_RECETAS, filas_del_catalogo(catalogo), ENCABEZADOS)
+
+                print(f"Receta modificada: {receta.nombre}")
+
+            except ItemNoEncontradoError as e:
+                print(e)
 
 
 def menu_coleccion(menu_semanal, pila_historial, cola_turnos, recetario):
@@ -115,7 +246,8 @@ def mostrar_menu():
     print("3. Buscar")
     print("4. Ordenar")
     print("5. Operación recursiva")
-    print("6. Colección principal (equipo / menú / playlist)")
+    print("6a. Colección principal (menú)")
+    print("6b. ABM del catálogo de recetas")
     print("7. Historial (pila)")
     print("8. Cola")
     print("9. Guardar / cargar archivos")
@@ -212,19 +344,27 @@ def main():
             for receta in Libro_recetas.catalogo_recetas:
                 print(f"{receta.nombre} - {clave_1(receta)} - {clave_2(receta)}")
 
+            # Regla de al E5: después de cada cambio al catálogo (cargar, ordenar, ABM), se guardan los
+            # archivos. Así el .bin siempre tiene el MISMO orden que la memoria y la posición de un ítem es la misma
+            guardar_todo()
+
         elif opcion == "5":
             r_desglosar = int(input("Ingrese el número de la receta a desglosar: "))
-            # any() recorre el catálogo y devuelve True si algún dict tiene id == receta_id (convertido a str). Corta al primer match.
+            # any() recorre el catálogo y devuelve True si algún dict tiene id == receta_id. Corta al primer match.
             if not any(
-                receta.receta_id == str(r_desglosar)
+                receta.receta_id == r_desglosar
                 for receta in Libro_recetas.catalogo_recetas
             ):
                 print("No existe una receta con ese id")
             else:
                 receta_desglosada = Libro_recetas.desglosar_subrecetas(r_desglosar)
                 print(f"Desgloce: {receta_desglosada}")
-        elif opcion == "6":
+
+        elif opcion == "6a":
             menu_coleccion(Menu_semana, pila_historial, cola_turnos, Libro_recetas)
+
+        elif opcion == "6b":
+            menu_abm_recetas(Libro_recetas)
 
         elif opcion == "7":
             print("\n--- Historial ---")
@@ -234,8 +374,47 @@ def main():
             print("\n--- Cola de preparación ---")
             cola_turnos.mostrar()
 
-        elif opcion in {"9"}:
-            pendiente()
+        elif opcion == "9":
+            print(" a) Cargar catálogo desde el .txt de la cátedra")
+            print(" b) Guardar catálogo en .txt")
+            print(" c) Guardar catálogo en binario (.bin)")
+            print(" d) Cargar catálogo desde binario (.bin)")
+            sub = input(" Subopción > ").strip().lower()
+            try:
+                if sub == "a":
+                    # Armamos el catálogo directamente como objetos del dominio
+                    # y cargamos la tabla de subrecetas como lista de diccionarios
+                    cargar_catalogo(Libro_recetas)
+                    print(
+                        f"Catálogo cargado: {Libro_recetas.catalogo_recetas.tamanio()} ítems."
+                    )
+                    # Regla de al E5: después de cada cambio al catálogo (cargar, ordenar, ABM), se guardan los
+                    # archivos. Así el .bin siempre tiene el MISMO orden que la memoria y la posición de un ítem es la misma
+                    guardar_todo()
+                elif sub == "b":
+                    guardar_texto(
+                        RUTA_RECETAS,
+                        filas_del_catalogo(Libro_recetas.catalogo_recetas),
+                        ENCABEZADOS,
+                    )
+                    print("Catálogo guardado en .txt.")
+                elif sub == "c":
+                    guardar_binario(RUTA_BIN, Libro_recetas.catalogo_recetas)
+                    print("Catálogo guardado en .bin.")
+                elif sub == "d":
+                    Libro_recetas.catalogo_recetas = cargar_binario(RUTA_BIN)
+                    print(
+                        f"Catálogo cargado desde .bin: "
+                        f"{Libro_recetas.catalogo_recetas.tamanio()} ítems."
+                    )
+                    # Regla de al E5: después de cada cambio al catálogo (cargar, ordenar, ABM), se guardan los
+                    # archivos. Así el .bin siempre tiene el MISMO orden que la memoria y la posición de un ítem es la misma
+                    guardar_todo()
+                else:
+                    print("Subopción inválida.")
+            except ArchivoInvalidoError as error:
+                print(f"Archivo inválido: {error}")
+
         else:
             print("Opción inválida.")
 
