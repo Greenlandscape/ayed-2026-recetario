@@ -82,9 +82,25 @@ Al pasar de 30 a 300 recetas (10 veces más datos), el tiempo de cada operación
 
 ## 6. Persistencia (E5)
 
-- Layout del registro binario (campos, `struct`, anchos):
-- Header:
-- Cómo se actualiza un registro por posición:
+- **Layout del registro binario:** `struct.Struct("<I 30s H 10s 15s")` = 61 bytes.
+  - `id`: entero sin signo (`I`, 4 bytes).
+  - `nombre`: cadena UTF-8 (30 bytes).
+  - `tiempo`: entero sin signo (`H`, 2 bytes).
+  - `dificultad`: cadena UTF-8 (10 bytes).
+  - `categoria`: cadena UTF-8 (15 bytes).
+  - Las cadenas se recortan o rellenan con `\x00` hasta alcanzar el ancho fijo.
+
+- **Header:** `struct.Struct("<4s 1s I")` = 9 bytes.
+  - Magia: `AYED` (4 bytes).
+  - Tema: `R` (1 byte).
+  - Cantidad de registros: entero sin signo (`I`, 4 bytes).
+
+- **Actualización por posición:** se utiliza
+  `seek(HEADER.size + posicion * FORMATO.size)` para acceder directamente al registro que se desea modificar y sobrescribirlo. Es acceso directo, O(1)
+
+- **Alta:** agrega un registro al final del archivo y actualiza la cantidad de registros del header.
+
+- **Baja:** reescribe el archivo sin el registro eliminado y actualiza la cantidad indicada en el header.
 
 ## 7. Reparto de trabajo (E6)
 

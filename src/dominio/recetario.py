@@ -1,5 +1,6 @@
 from src.dominio.receta import Receta
 from src.tads.lista_enlazada import ListaEnlazada
+from src.persistencia.texto import cargar_texto
 
 
 class Recetario:
@@ -97,3 +98,42 @@ class Recetario:
         for s in subs:
             resultado += self.desglosar_subrecetas(s)
         return resultado
+
+
+def armar_catalogo_desde_txt(ruta):
+    """Lee el .txt y devuelve la ListaEnlazada con objetos del dominio."""
+    catalogo = ListaEnlazada()
+    for fila in cargar_texto(ruta):
+        receta = Receta(
+            id=int(fila["id"]),  # acá se convierten los números que antes eran string
+            nombre=fila["nombre"],
+            tiempo_min=int(fila["tiempo_min"]),
+            dificultad=fila["dificultad"] or None,  # si viene vacío → None
+            categoria=fila["categoria"],
+        )
+        catalogo.insertar_al_final(receta)
+    return catalogo
+
+
+def armar_subrecetas_desde_txt(ruta):
+    """Lee el archivo de subrecetas y devuelve una lista de diccionarios."""
+    return cargar_texto(ruta)
+
+
+ENCABEZADOS = ["id", "nombre", "tiempo_min", "dificultad", "categoria"]
+
+
+def filas_del_catalogo(catalogo):
+    """Convierte los objetos del dominio en dicts para guardar_texto."""
+    filas = []
+    for p in catalogo:
+        filas.append(
+            {
+                "id": p.receta_id,
+                "nombre": p.nombre,
+                "tiempo_min": p.tiempo,
+                "dificultad": p.dificultad or "",
+                "categoria": p.categoria,
+            }
+        )
+    return filas
