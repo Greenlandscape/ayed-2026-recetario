@@ -190,7 +190,7 @@ def menu_coleccion(menu_semanal, pila_historial, cola_turnos, recetario):
 
             receta_encontrada = None
             for receta in recetario.catalogo_recetas:
-                if receta.receta_id == str(receta_id):
+                if receta.receta_id == receta_id:
                     receta_encontrada = receta
                     break
 
@@ -226,7 +226,7 @@ def menu_coleccion(menu_semanal, pila_historial, cola_turnos, recetario):
 
             receta_encontrada = None
             for receta in recetario.catalogo_recetas:
-                if receta.receta_id == str(receta_id):
+                if receta.receta_id == receta_id:
                     receta_encontrada = receta
                     break
 
@@ -269,84 +269,154 @@ def main():
             listar_catalogo(
                 Libro_recetas.catalogo_recetas
             )  # se modificó la función para usar lista enlazada
+
         elif opcion == "2":
-            receta_id = int(input("Ingrese el id de la receta para mostrar detalles: "))
-            if not Libro_recetas.mostrar_datos_receta(
-                receta_id
-            ):  # si existe la muestra, si no, muestra msj
-                print("No existe una receta con ese id")
+            try:
+                receta_id = int(
+                    input("Ingrese el id de la receta para mostrar detalles: ")
+                )
+                if not Libro_recetas.mostrar_datos_receta(
+                    receta_id
+                ):  # si existe la muestra, si no, muestra msj
+                    print("No existe una receta con ese id")
+            except ValueError as error:
+                print("Debe ingresar un ID numérico válido.")
+
         elif opcion == "3":
-            opcion = int(input("Elija el tipo de búsqueda: 1) Lineal 2) Binaria: "))
-            nombre_r = input(
-                "Ingrese el nombre a buscar (Ejemplos: Sofrito, Pesto, Asado): "
-            )
-            if opcion == 1:
-                # Obtenemos el atributo nombre de cada receta mediante una función lambda.
-                receta_buscada = busqueda_lineal(
-                    Libro_recetas.catalogo_recetas,
-                    nombre_r,
-                    lambda receta: receta.nombre,
-                )
-                if receta_buscada is not None:
-                    receta_buscada.mostrar_datos()
-                else:
-                    print("No se encontró la receta.")
-            elif opcion == 2:
-                obtener_nombre = lambda receta: receta.nombre
-                ordenar_insercion(Libro_recetas.catalogo_recetas, obtener_nombre)
-                print("¡Se ordenó la lista antes de buscar!")
-                receta_buscada = busqueda_binaria(
-                    Libro_recetas.catalogo_recetas,
-                    nombre_r,
-                    obtener_nombre,
-                )
-                if receta_buscada is not None:
-                    receta_buscada.mostrar_datos()
-                else:
-                    print("No se encontró la receta.")
+            try:
+                opcion = int(input("Elija el tipo de búsqueda: 1) Lineal 2) Binaria: "))
+            except ValueError as error:
+                print("Debe ingresar 1 o 2.")
             else:
-                print("Opción inválida")
+
+                if opcion == 1:
+                    nombre_r = input(
+                        "Ingrese el nombre a buscar (Ejemplos: Sofrito, Pesto, Asado): "
+                    )
+                    # Obtenemos el atributo nombre de cada receta mediante una función lambda.
+                    receta_buscada = busqueda_lineal(
+                        Libro_recetas.catalogo_recetas,
+                        nombre_r,
+                        lambda receta: receta.nombre,
+                    )
+                    if receta_buscada is not None:
+                        receta_buscada.mostrar_datos()
+                    else:
+                        print("No se encontró la receta.")
+                elif opcion == 2:
+                    nombre_r = input(
+                        "Ingrese el nombre a buscar (Ejemplos: Sofrito, Pesto, Asado): "
+                    )
+                    obtener_nombre = lambda receta: receta.nombre
+                    ordenar_insercion(Libro_recetas.catalogo_recetas, obtener_nombre)
+                    print("¡Se ordenó la lista antes de buscar!")
+                    receta_buscada = busqueda_binaria(
+                        Libro_recetas.catalogo_recetas,
+                        nombre_r,
+                        obtener_nombre,
+                    )
+                    if receta_buscada is not None:
+                        receta_buscada.mostrar_datos()
+                    else:
+                        print("No se encontró la receta o no la ingresó.")
+                else:
+                    print("Opción inválida")
+
         elif opcion == "4":
-            tipo = int(
-                input("Elija el tipo de ordenamiento: 1) Selección 2) Inserción: ")
-            )
-            print("Ordenar por:")
-            print("1) id")
-            print("2) Nombre")
-            print("3) Tiempo en minutos")
-            print("4) Dificultad")
-            print("5) Categoría")
-            principal = int(input("Criterio principal: "))
-            secundario = int(input("Criterio secundario (desempate): "))
-
-            claves = {
-                1: lambda receta: int(receta.receta_id),
-                2: lambda receta: receta.nombre,
-                3: lambda receta: int(receta.tiempo),
-                4: lambda receta: receta.dificultad,
-                5: lambda receta: receta.categoria,
-            }
-            clave_1 = claves[principal]
-            clave_2 = claves[secundario]
-            obtener_clave = lambda receta: (clave_1(receta), clave_2(receta))
-            # obtener_clave devuelve una tupla (criterio principal, criterio secundario).
-            # Los algoritmos no cambian: comparan tuplas, y Python las compara
-            # elemento por elemento (el secundario solo desempata).
-
-            if tipo == 1:
-                ordenar_seleccion(Libro_recetas.catalogo_recetas, obtener_clave)
-                print("¡Ordenado por selección!")
+            volver_al_menu = False
+            try:
+                tipo = int(
+                    input("Elija el tipo de ordenamiento: 1) Selección 2) Inserción: ")
+                )
+            except ValueError:
+                print("Debe ingresar 1 o 2.")
             else:
-                ordenar_insercion(Libro_recetas.catalogo_recetas, obtener_clave)
-                print("¡Ordenado por inserción!")
+                if tipo not in (1, 2):
+                    volver_al_menu = True
+                    print("Opción inválida.")
+                if not volver_al_menu:
+                    print("Ordenar por:")
+                    print("1) id")
+                    print("2) Nombre")
+                    print("3) Tiempo en minutos")
+                    print("4) Dificultad")
+                    print("5) Categoría")
+                    try:
+                        principal = int(input("Criterio principal: "))
 
-            print("Resultado: ")
-            for receta in Libro_recetas.catalogo_recetas:
-                print(f"{receta.nombre} - {clave_1(receta)} - {clave_2(receta)}")
+                    except ValueError:
+                        volver_al_menu = True
+                        print("Debe ingresar valores entre 1 y 5.")
+                    if (
+                        not volver_al_menu
+                    ):  # esto protege contra un ingreso inválido en principal
+                        if principal not in {1, 2, 3, 4, 5}:
+                            volver_al_menu = True
+                            print("Opción inválida.")
+                        if (
+                            not volver_al_menu
+                        ):  # esto protege contra un valor inválido de principal
+                            try:
+                                secundario = int(
+                                    input("Criterio secundario (desempate): ")
+                                )
+                            except ValueError:
+                                volver_al_menu = True
+                                print("Debe ingresar valores entre 1 y 5.")
 
-            # Regla de al E5: después de cada cambio al catálogo (cargar, ordenar, ABM), se guardan los
-            # archivos. Así el .bin siempre tiene el MISMO orden que la memoria y la posición de un ítem es la misma
-            guardar_todo()
+                            if (
+                                not volver_al_menu
+                            ):  # esto protege contra un ingreso inválido en secundario
+                                if secundario not in {1, 2, 3, 4, 5}:
+                                    volver_al_menu = True
+                                    print("Opción inválida.")
+
+                                if (
+                                    not volver_al_menu
+                                ):  # Continuar solo si ambos criterios se ingresaron correctamente.
+                                    claves = {
+                                        1: lambda receta: int(receta.receta_id),
+                                        2: lambda receta: receta.nombre,
+                                        3: lambda receta: int(receta.tiempo),
+                                        4: lambda receta: receta.dificultad,
+                                        5: lambda receta: receta.categoria,
+                                    }
+                                    clave_1 = claves[principal]
+                                    clave_2 = claves[secundario]
+                                    if principal == secundario:
+                                        volver_al_menu = True
+                                        print("Los criterios deben ser diferentes.")
+                                    else:
+                                        obtener_clave = lambda receta: (
+                                            clave_1(receta),
+                                            clave_2(receta),
+                                        )
+                                        # obtener_clave devuelve una tupla (criterio principal, criterio secundario).
+                                        # Los algoritmos no cambian: comparan tuplas, y Python las compara
+                                        # elemento por elemento (el secundario solo desempata).
+
+                                        if tipo == 1:
+                                            ordenar_seleccion(
+                                                Libro_recetas.catalogo_recetas,
+                                                obtener_clave,
+                                            )
+                                            print("¡Ordenado por selección!")
+                                        else:
+                                            ordenar_insercion(
+                                                Libro_recetas.catalogo_recetas,
+                                                obtener_clave,
+                                            )
+                                            print("¡Ordenado por inserción!")
+
+                                        print("Resultado: ")
+                                        for receta in Libro_recetas.catalogo_recetas:
+                                            print(
+                                                f"{receta.nombre} - {clave_1(receta)} - {clave_2(receta)}"
+                                            )
+
+                                        # Regla de al E5: después de cada cambio al catálogo (cargar, ordenar, ABM), se guardan los
+                                        # archivos. Así el .bin siempre tiene el MISMO orden que la memoria y la posición de un ítem es la misma
+                                        guardar_todo()
 
         elif opcion == "5":
             r_desglosar = int(input("Ingrese el número de la receta a desglosar: "))
